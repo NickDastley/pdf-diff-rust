@@ -1,6 +1,37 @@
-[package]
-name = "pdf-diff-rust"
+# Virtual workspace manifest: this crate has a [workspace] table but no
+# [package], so it coordinates the members under crates/ without building a
+# crate itself.
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+# Settings inherited by every member via `field.workspace = true`.
+# Keeping versions/paths in one place is how large Rust projects avoid drift.
+[workspace.package]
 version = "0.1.0"
 edition = "2024"
+rust-version = "1.85"
+license = "Apache-2.0"
+authors = ["pdf-diff-rust contributors"]
 
-[dependencies]
+[workspace.dependencies]
+# Internal crates (path dependencies). Listing them here lets a member depend
+# on `pdfdiff-core = { workspace = true }` without repeating the path.
+pdfdiff-core = { path = "crates/pdfdiff-core" }
+pdfdiff-extract = { path = "crates/pdfdiff-extract" }
+pdfdiff-diff = { path = "crates/pdfdiff-diff" }
+
+# Third-party crates. Versions are pinned once, here.
+serde = { version = "1", features = ["derive"] }
+# `preserve_order` keeps object key order when round-tripping through
+# `serde_json::Value`, so serialized output is stable.
+serde_json = { version = "1", features = ["preserve_order"] }
+thiserror = "2"
+toml = "0.8"
+sha1 = "0.10"
+unicode-normalization = "0.1"
+
+# Shared lint configuration. Each member opts in with `[lints] workspace = true`.
+# CI runs `cargo clippy -- -D warnings`, so anything `warn` here becomes an error.
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }

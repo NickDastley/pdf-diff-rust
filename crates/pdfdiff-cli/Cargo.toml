@@ -1,0 +1,22 @@
+[package]
+name = "pdfdiff-cli"
+description = "Command-line interface for pdf-diff"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+# `[[bin]]` renames the produced executable to `pdf-diff` regardless of the
+# crate name. This is the name users type on the command line.
+[[bin]]
+name = "pdf-diff"
+path = "src/main.rs"
+
+[dependencies]
+pdfdiff-core = { workspace = true }
+pdfdiff-extract = { workspace = true }
+pdfdiff-diff = { workspace = true }
+
+[lints]
+workspace = true

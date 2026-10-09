@@ -1,0 +1,15 @@
+[package]
+name = "pdfdiff-diff"
+description = "Structural diff of two document IRs for pdf-diff"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+
+[dependencies]
+pdfdiff-core = { workspace = true }
+thiserror = { workspace = true }
+
+[lints]
+workspace = true

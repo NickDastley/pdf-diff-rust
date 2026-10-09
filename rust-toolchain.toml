@@ -1,0 +1,6 @@
+# Pinning the toolchain means every contributor and CI runner uses the same
+# compiler. `stable` follows the latest stable release; add an exact version
+# (e.g. "1.99.0") later if we want byte-identical builds.
+[toolchain]
+channel = "stable"
+components = ["rustfmt", "clippy", "rust-analyzer"]

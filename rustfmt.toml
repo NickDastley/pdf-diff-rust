@@ -1,0 +1,7 @@
+# rustfmt is the canonical formatter; CI runs `cargo fmt --all --check`.
+# We stay close to defaults on purpose: exotic options make diffs noisy and
+# raise the bar for new contributors.
+edition = "2024"
+max_width = 100
+use_field_init_shorthand = true
+use_try_shorthand = true
